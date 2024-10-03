@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Mars Sticker">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Price</label>
+                <input name="price" type="number" class="form-control" id="exampleFormControlInput2" placeholder="599">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput3" class="form-label">Count</label>
+                <input name="count" type="number" class="form-control" id="exampleFormControlInput3" placeholder="23">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Image</label>
+                <input name="image" class="form-control" type="file" id="formFile">
+            </div>
+            <button type="submit">Save</button>
+        </form>
+
+
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">MARS Shop</h1>
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="card ms-3" style="width: 18rem;">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price }} Coins</p>
+                <p class="card-text">{{ product.count }}</p>
+                <div class="container mt-4">
+
+                    {% if request.user.coins >= product.price %}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#purchaseModal1">
+                        Sotib olish
+                    </button>
+                    {% elif request.user.coins < product.price %}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#purchaseModal2">
+                        Sotib olish
+                    </button>
+                    {% elif product.count < 1 %}
+                    <span>Maxsulot yo'q</span>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- Purchase Modal -->
+            <div class="modal fade" id="purchaseModal1" tabindex="-1" aria-labelledby="purchaseModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="purchaseModalLabel">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="modal-body">
+                                Siz rostdan ham ushbu mahsulotni sotib olmoqchimisiz?
+                            </div>
+                            <a href="{% url 'buy' product.id %}">
+                                <button type="button" class="btn btn-success">Xa, sotib olaman</button>
+                            </a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="purchaseModal2" tabindex="-1" aria-labelledby="purchaseModalLabel2"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="purchaseModalLabel2">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="modal-body">
+                                Sizda koinlar soni yatarli emas
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="purchaseModal3" tabindex="-1" aria-labelledby="purchaseModalLabel3"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="purchaseModalLabel3">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="modal-body">
+                               Maxsulot qolmagan
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

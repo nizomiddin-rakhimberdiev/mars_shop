@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row p-5">
+        <div class="col-md-4 text-center">
+            <img style="border-radius:50%" class="img-fluid mb-3" src="{{ data.avatar.url }}" alt="{{ data.avatar.url }}">
+            <h2 class="text-warning">{{ data.coins }} 🪙</h2>
+            <h3>{{ data.username }}</h3>
+        </div>
+        <div class="col-md-8 px-5">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h2>{{ data.first_name }} {{ data.last_name }}</h2></li>
+                <li class="list-group-item"><h3>{{ data.email }}</h3></li>
+                <li class="list-group-item"><h3>{{ data.phone_number }}</h3></li>
+            </ul>
+            <a class="btn btn-success" href="{% url 'edit-profile' %}">Edit profile</a>
+        </div>
+    </div>
+
+{% endblock %}

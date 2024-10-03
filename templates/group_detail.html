@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Teacher profile</h1>
+
+  <h3>{{ group.teacher.username }}</h3>
+  <h4>{{ group.name }}</h4>
+
+  {% for student in students %}
+  <ul>
+    <li>
+      {{ student.first_name }} {{ student.last_name }} - <span id="coins-{{ student.id }}">{{ student.coins }}</span>
+      <form method="post" class="d-inline" id="form-{{ student.id }}">
+        {% csrf_token %}
+        <input type="number" id="{{ student.id }}" name="coin" value=0>
+        <button type="submit" class="btn btn-warning">Add</button>
+      </form>
+    </li>
+  </ul>
+  {% endfor %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('form[id^="form-"]').forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var formData = new FormData(form);
+                var studentId = form.id.split('-')[1];
+                var csrfToken = form.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+                fetch(`/users/add-coins/${studentId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`coins-${studentId}`).textContent = data.new_coins;
+                    } else {
+                        alert(data.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+</script>
+
+{% endblock %}
