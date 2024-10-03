@@ -1,3 +1,5 @@
+from http.client import HTTPResponse
+
 from django.shortcuts import render, redirect
 
 
@@ -21,6 +23,10 @@ def add_product_view(request):
         product.save()
         return redirect('home')
     return render(request, 'add_product.html')
+
+
+def nimadir(request):
+    return HTTPResponse("salom")
 
 
 
