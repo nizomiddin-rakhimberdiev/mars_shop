@@ -26,7 +26,11 @@ def add_product_view(request):
 
 
 def nimadir(request):
-    return HTTPResponse("salom")
+    return HTTPResponse("salom Dunyo")
+
+
+def abdurahmon(request):
+    return HTTPResponse('Salom Abdurahmon')
 
 
 def islombek(request):
