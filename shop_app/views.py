@@ -30,3 +30,5 @@ def nimadir(request):
 
 
 
+def admin(request):
+    return HTTPResponse("salom admin")
