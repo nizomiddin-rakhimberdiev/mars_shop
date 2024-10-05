@@ -29,4 +29,7 @@ def nimadir(request):
     return HTTPResponse("salom Dunyo")
 
 
+def teacher(request):
+    return HTTPResponse("Salom Teacher")
+
 
