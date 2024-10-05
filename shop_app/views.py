@@ -26,7 +26,7 @@ def add_product_view(request):
 
 
 def nimadir(request):
-    return HTTPResponse("salom")
+    return HTTPResponse("salom Dunyo")
 
 
 
