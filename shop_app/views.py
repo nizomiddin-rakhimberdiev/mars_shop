@@ -29,4 +29,8 @@ def nimadir(request):
     return HTTPResponse("salom")
 
 
+def islombek(request):
+    return HTTPResponse('Salom Islombek')
+
+
 
