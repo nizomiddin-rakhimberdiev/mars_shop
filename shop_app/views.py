@@ -30,3 +30,5 @@ def nimadir(request):
 
 
 
+def laylo(request):
+    return HTTPResponse("hello")
